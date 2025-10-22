@@ -18,8 +18,8 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        padding: 8px;
-        overflow: hidden;
+        padding: 16px; /* Increased base padding for better space */
+        overflow: auto; /* Changed to auto to allow scrolling if needed */
         position: relative;
     }
 
@@ -49,17 +49,23 @@
     }
 
     @keyframes floatHearts {
-        0% { transform: translateY(0) scale(1) rotate(0deg); opacity: 1; }
-        100% { transform: translateY(-800px) scale(1.5) rotate(360deg); opacity: 0; }
+        0% {
+            transform: translateY(0) scale(1) rotate(0deg);
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(-800px) scale(1.5) rotate(360deg);
+            opacity: 0;
+        }
     }
 
-    /* 🎮 Game Container */
+    /* 💎 Game Container */
     .game-container {
         background: white;
-        border-radius: 10px;
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-        padding: 20px;
-        max-width: 400px;
+        border-radius: 12px; /* Slightly larger border radius */
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3); /* Stronger shadow */
+        padding: 20px; /* Slightly more padding */
+        max-width: 400px; /* Increased max-width for better desktop experience */
         width: 100%;
         z-index: 10;
         position: relative;
@@ -68,30 +74,28 @@
     h1 {
         color: #667eea;
         text-align: center;
-        margin-bottom: 12px;
-        font-size: 1.3em;
-        word-break: break-word;
+        margin-bottom: 15px;
+        font-size: 1.4em; /* Slightly larger heading */
     }
 
     .game-info {
         display: flex;
-        justify-content: space-between;
-        margin-bottom: 12px;
+        justify-content: space-around; /* Changed to space-around */
+        margin-bottom: 15px;
         padding: 8px;
         background: #f8f9fa;
-        border-radius: 6px;
-        flex-wrap: wrap;
+        border-radius: 8px;
     }
 
-    .info-item { text-align: center; flex: 1; min-width: 80px; }
+    .info-item { text-align: center; }
     .info-label { font-size: 0.75em; color: #666; margin-bottom: 2px; }
     .info-value { font-size: 1em; font-weight: bold; color: #667eea; }
 
     .puzzle-area {
         background: #f8f9fa;
         border-radius: 8px;
-        padding: 10px;
-        margin-bottom: 12px;
+        padding: 12px;
+        margin-bottom: 15px;
         text-align: center;
     }
 
@@ -103,23 +107,23 @@
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     }
 
-    .loading { font-size: 0.8em; color: #667eea; padding: 15px; }
+    .loading { font-size: 0.9em; color: #667eea; padding: 15px; }
 
-    .answer-section { margin-bottom: 10px; }
+    .answer-section { margin-bottom: 12px; }
     .answer-grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 6px;
-        margin-bottom: 8px;
+        gap: 8px; /* Increased gap */
+        margin-bottom: 10px;
     }
 
     .answer-btn {
-        padding: 8px;
-        font-size: 0.9em;
+        padding: 10px; /* Slightly more padding for easier touch */
+        font-size: 1em;
         border: 1.5px solid #667eea;
         background: white;
         color: #667eea;
-        border-radius: 6px;
+        border-radius: 8px; /* Slightly larger border radius */
         cursor: pointer;
         transition: all 0.2s ease;
         font-weight: bold;
@@ -128,34 +132,32 @@
     .answer-btn:hover {
         background: #667eea;
         color: white;
-        transform: translateY(-1px);
-        box-shadow: 0 2px 4px rgba(102, 126, 234, 0.3);
+        transform: translateY(-2px); /* Increased transform */
+        box-shadow: 0 4px 6px rgba(102, 126, 234, 0.4); /* Stronger shadow */
     }
 
     .input-section {
         display: flex;
-        gap: 6px;
-        flex-wrap: wrap;
-        margin-bottom: 10px;
+        gap: 8px; /* Increased gap */
+        margin-bottom: 12px;
     }
 
     #answerInput {
         flex: 1;
-        min-width: 100px;
-        padding: 6px;
-        font-size: 0.9em;
+        padding: 8px; /* Slightly more padding */
+        font-size: 1em;
         border: 1.5px solid #667eea;
-        border-radius: 6px;
+        border-radius: 8px;
         outline: none;
     }
 
     #submitBtn {
-        padding: 6px 12px;
-        font-size: 0.9em;
+        padding: 8px 15px; /* Slightly more padding */
+        font-size: 1em;
         background: #667eea;
         color: white;
         border: none;
-        border-radius: 6px;
+        border-radius: 8px;
         cursor: pointer;
         transition: all 0.2s ease;
         font-weight: bold;
@@ -163,19 +165,18 @@
 
     #submitBtn:hover {
         background: #5568d3;
-        transform: translateY(-1px);
-        box-shadow: 0 2px 4px rgba(102, 126, 234, 0.3);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 6px rgba(102, 126, 234, 0.4);
     }
 
     .feedback {
-        padding: 8px;
-        border-radius: 6px;
-        margin-bottom: 8px;
+        padding: 10px;
+        border-radius: 8px;
+        margin-bottom: 12px;
         text-align: center;
-        font-size: 0.9em;
+        font-size: 1em;
         font-weight: bold;
         display: none;
-        word-wrap: break-word;
     }
 
     .feedback.correct {
@@ -194,40 +195,39 @@
 
     #nextBtn {
         width: 100%;
-        padding: 8px;
-        font-size: 0.9em;
+        padding: 10px;
+        font-size: 1em;
         background: #28a745;
         color: white;
         border: none;
-        border-radius: 6px;
+        border-radius: 8px;
         cursor: pointer;
         transition: all 0.2s ease;
         font-weight: bold;
         display: none;
+        margin-bottom: 10px; /* Added margin-bottom */
     }
 
     #nextBtn:hover {
         background: #218838;
-        transform: translateY(-1px);
-        box-shadow: 0 2px 4px rgba(40, 167, 69, 0.3);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 6px rgba(40, 167, 69, 0.4);
     }
 
     .controls {
         display: flex;
-        gap: 6px;
+        gap: 8px;
         margin-top: 10px;
-        flex-wrap: wrap;
     }
 
     .control-btn {
         flex: 1;
-        min-width: 100px;
-        padding: 6px;
-        font-size: 0.85em;
+        padding: 8px;
+        font-size: 0.9em;
         border: 1.5px solid #667eea;
         background: white;
         color: #667eea;
-        border-radius: 6px;
+        border-radius: 8px;
         cursor: pointer;
         transition: all 0.2s ease;
         font-weight: bold;
@@ -236,62 +236,142 @@
     .control-btn:hover {
         background: #667eea;
         color: white;
+        transform: translateY(-1px);
     }
 
-    
-    @media (max-width: 400px) {
-        #answerInput { font-size: 0.8em; }
-        .answer-btn { font-size: 0.8em; padding: 6px; }
-        #submitBtn, #nextBtn, .control-btn { font-size: 0.8em; padding: 6px; }
+    /* 📱 Responsive Styles for Small Screens (e.g., phones) */
+    @media (max-width: 600px) {
+        body { padding: 10px; } /* Less padding on very small screens */
+        
+        .game-container { 
+            padding: 12px; 
+            max-width: 95%; /* Use more of the available screen width */
+            margin-top: 20px; /* Ensure space from the top */
+            margin-bottom: 20px; /* Ensure space at the bottom */
+        }
+        
+        h1 { 
+            font-size: 1.2em; 
+            margin-bottom: 10px;
+        }
+
+        .game-info {
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+
+        .info-label { font-size: 0.7em; }
+        .info-value { font-size: 0.9em; }
+
+        .puzzle-area {
+            padding: 8px;
+            margin-bottom: 10px;
+        }
+
+        /* Key responsive change: Answer grid switches to 2 columns on small screens */
+        .answer-grid { 
+            grid-template-columns: repeat(2, 1fr); 
+            gap: 6px;
+        }
+        
+        .answer-btn {
+            padding: 8px;
+            font-size: 0.9em;
+        }
+
+        .input-section {
+            gap: 6px;
+        }
+
+        #answerInput, #submitBtn {
+            padding: 7px;
+            font-size: 0.9em;
+        }
+
+        .feedback {
+            font-size: 0.9em;
+            padding: 8px;
+        }
+
+        #nextBtn {
+            padding: 8px;
+            font-size: 0.9em;
+        }
+
+        .control-btn {
+            padding: 7px;
+            font-size: 0.75em; /* Smaller font for control buttons */
+        }
+        
+        /* Reduce heart size and animation for less screen clutter on mobile */
+        .hearts span {
+            width: 20px;
+            height: 20px;
+        }
+        @keyframes floatHearts {
+            100% {
+                transform: translateY(-600px) scale(1.2) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    }
+
+    /* Optional: Styles for medium-sized tablets (to ensure good layout) */
+    @media (min-width: 401px) and (max-width: 768px) {
+        .game-container {
+            max-width: 380px;
+        }
+        .answer-grid {
+            grid-template-columns: repeat(3, 1fr); /* Keep 3 columns here */
+        }
     }
 </style>
 </head>
 <body>
-
-<!-- ❤️ Floating Hearts -->
-<div class="hearts">
-    <span style="left:10%; animation-delay: 0s;"></span>
-    <span style="left:20%; animation-delay: 2s;"></span>
-    <span style="left:30%; animation-delay: 4s;"></span>
-    <span style="left:40%; animation-delay: 6s;"></span>
-    <span style="left:50%; animation-delay: 1s;"></span>
-    <span style="left:60%; animation-delay: 3s;"></span>
-    <span style="left:70%; animation-delay: 5s;"></span>
-    <span style="left:80%; animation-delay: 7s;"></span>
-</div>
-
-<!-- 🎮 Game Container -->
-<div class="game-container">
-    <h1>🎮 Heart Math Puzzle</h1>
-    
-    <div class="game-info">
-        <div class="info-item"><div class="info-label">Score</div><div class="info-value" id="score">0</div></div>
-        <div class="info-item"><div class="info-label">Correct</div><div class="info-value" id="correct">0</div></div>
-        <div class="info-item"><div class="info-label">Wrong</div><div class="info-value" id="wrong">0</div></div>
+    <!-- ❤️ Floating Hearts -->
+    <div class="hearts">
+        <span style="left:10%; animation-delay: 0s;"></span>
+        <span style="left:20%; animation-delay: 2s;"></span>
+        <span style="left:30%; animation-delay: 4s;"></span>
+        <span style="left:40%; animation-delay: 6s;"></span>
+        <span style="left:50%; animation-delay: 1s;"></span>
+        <span style="left:60%; animation-delay: 3s;"></span>
+        <span style="left:70%; animation-delay: 5s;"></span>
+        <span style="left:80%; animation-delay: 7s;"></span>
     </div>
 
-    <div class="puzzle-area">
-        <div id="loadingText" class="loading">Loading puzzle...</div>
-        <img id="puzzleImage" style="display: none;" alt="Math Puzzle">
-    </div>
+    <!-- 🎮 Game Container -->
+    <div class="game-container">
+        <h1>🎮 Heart Math Puzzle</h1>
+        
+        <div class="game-info">
+            <div class="info-item"><div class="info-label">Score</div><div class="info-value" id="score">0</div></div>
+            <div class="info-item"><div class="info-label">Correct</div><div class="info-value" id="correct">0</div></div>
+            <div class="info-item"><div class="info-label">Wrong</div><div class="info-value" id="wrong">0</div></div>
+        </div>
 
-    <div class="feedback" id="feedback"></div>
+        <div class="puzzle-area">
+            <div id="loadingText" class="loading">Loading puzzle...</div>
+            <img id="puzzleImage" style="display: none;" alt="Math Puzzle">
+        </div>
 
-    <div class="answer-section">
-        <div class="answer-grid" id="answerGrid"></div>
-        <div class="input-section">
-            <input type="number" id="answerInput" placeholder="Enter your answer">
-            <button id="submitBtn">Submit</button>
+        <div class="feedback" id="feedback"></div>
+
+        <div class="answer-section">
+            <div class="answer-grid" id="answerGrid"></div>
+            <div class="input-section">
+                <input type="number" id="answerInput" placeholder="Enter your answer">
+                <button id="submitBtn">Submit</button>
+            </div>
+        </div>
+
+        <button id="nextBtn">Next Puzzle</button>
+
+        <div class="controls">
+            <button class="control-btn" onclick="location.reload()">New Game</button>
+            <button class="control-btn" id="hintBtn">Hint</button>
         </div>
     </div>
-
-    <button id="nextBtn">Next Puzzle</button>
-
-    <div class="controls">
-        <button class="control-btn" onclick="location.reload()">New Game</button>
-        <button class="control-btn" id="hintBtn">Hint</button>
-    </div>
-</div>
 
 <script>
 class HeartGame {
@@ -418,15 +498,15 @@ class HeartGame {
     }
 
     showHint() {
-        if (this.hasAnswered) { alert('You have already answered this puzzle!'); return; }
+        if (this.hasAnswered) {
+            alert('You have already answered this puzzle!');
+            return;
+        }
         const hint = `The answer is between ${Math.max(0, this.currentSolution - 3)} and ${this.currentSolution + 3}`;
         alert(hint);
     }
 }
-
 const game = new HeartGame();
 </script>
 </body>
 </html>
-
-
