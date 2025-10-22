@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Heart Game - Math Puzzle</title>
 <style>
     * {
@@ -38,8 +38,8 @@
     .hearts span {
         position: absolute;
         display: block;
-        width: 15px;
-        height: 15px;
+        width: clamp(20px, 4vw, 40px);
+        height: clamp(20px, 4vw, 40px);
         background: rgba(255, 0, 80, 0.8);
         animation: floatHearts 10s linear infinite;
         bottom: -30px;
@@ -62,11 +62,11 @@
     /* 💎 Game Container */
     .game-container {
         background: white;
-        border-radius: 10px;
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-        padding: 15px;
-        max-width: 350px;
+        border-radius: 12px;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+        padding: clamp(15px, 3vw, 25px);
         width: 100%;
+        max-width: 400px;
         z-index: 10;
         position: relative;
     }
@@ -74,8 +74,8 @@
     h1 {
         color: #667eea;
         text-align: center;
-        margin-bottom: 12px;
-        font-size: 1.2em;
+        margin-bottom: 14px;
+        font-size: clamp(1.1rem, 2vw, 1.6rem);
     }
 
     .game-info {
@@ -84,12 +84,12 @@
         margin-bottom: 12px;
         padding: 6px;
         background: #f8f9fa;
-        border-radius: 6px;
+        border-radius: 8px;
     }
 
-    .info-item { text-align: center; }
-    .info-label { font-size: 0.7em; color: #666; margin-bottom: 2px; }
-    .info-value { font-size: 0.9em; font-weight: bold; color: #667eea; }
+    .info-item { text-align: center; flex: 1; }
+    .info-label { font-size: clamp(0.65rem, 1.5vw, 0.8rem); color: #666; margin-bottom: 2px; }
+    .info-value { font-size: clamp(0.8rem, 2vw, 1rem); font-weight: bold; color: #667eea; }
 
     .puzzle-area {
         background: #f8f9fa;
@@ -107,19 +107,19 @@
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     }
 
-    .loading { font-size: 0.8em; color: #667eea; padding: 15px; }
+    .loading { font-size: 0.85em; color: #667eea; padding: 15px; }
 
     .answer-section { margin-bottom: 10px; }
     .answer-grid {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
         gap: 6px;
         margin-bottom: 8px;
     }
 
     .answer-btn {
-        padding: 8px;
-        font-size: 0.9em;
+        padding: clamp(6px, 2vw, 10px);
+        font-size: clamp(0.85rem, 2vw, 1rem);
         border: 1.5px solid #667eea;
         background: white;
         color: #667eea;
@@ -144,16 +144,16 @@
 
     #answerInput {
         flex: 1;
-        padding: 6px;
-        font-size: 0.9em;
+        padding: clamp(6px, 2vw, 10px);
+        font-size: clamp(0.85rem, 2vw, 1rem);
         border: 1.5px solid #667eea;
         border-radius: 6px;
         outline: none;
     }
 
     #submitBtn {
-        padding: 6px 12px;
-        font-size: 0.9em;
+        padding: clamp(6px, 2vw, 10px);
+        font-size: clamp(0.85rem, 2vw, 1rem);
         background: #667eea;
         color: white;
         border: none;
@@ -174,7 +174,7 @@
         border-radius: 6px;
         margin-bottom: 8px;
         text-align: center;
-        font-size: 0.9em;
+        font-size: clamp(0.85rem, 2vw, 1rem);
         font-weight: bold;
         display: none;
     }
@@ -195,8 +195,8 @@
 
     #nextBtn {
         width: 100%;
-        padding: 8px;
-        font-size: 0.9em;
+        padding: clamp(8px, 2vw, 12px);
+        font-size: clamp(0.85rem, 2vw, 1rem);
         background: #28a745;
         color: white;
         border: none;
@@ -221,8 +221,8 @@
 
     .control-btn {
         flex: 1;
-        padding: 6px;
-        font-size: 0.8em;
+        padding: clamp(6px, 2vw, 10px);
+        font-size: clamp(0.8rem, 2vw, 0.95rem);
         border: 1.5px solid #667eea;
         background: white;
         color: #667eea;
@@ -237,10 +237,21 @@
         color: white;
     }
 
-    @media (max-width: 700px) {
-        .game-container { padding: 10px; max-width: 300px; }
-        h1 { font-size: 1em; }
-        .answer-grid { grid-template-columns: repeat(2, 1fr); }
+    /* 📱 Responsive Tweaks */
+    @media (max-width: 480px) {
+        .game-container {
+            max-width: 90%;
+            padding: 15px;
+        }
+        .answer-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    @media (max-width: 350px) {
+        .answer-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
     }
 </style>
 </head>
@@ -427,6 +438,3 @@ const game = new HeartGame();
 </script>
 </body>
 </html>
-
-
-
