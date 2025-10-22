@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Heart Game - Math Puzzle</title>
 <style>
     * {
@@ -11,14 +11,14 @@
         box-sizing: border-box;
     }
 
-    body {
+    html, body {
+        width: 100%;
+        height: 100%;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         background: linear-gradient(135deg, #010412 0%, #764ba2 100%);
-        min-height: 100vh;
         display: flex;
         justify-content: center;
         align-items: center;
-        padding: 8px;
         overflow: hidden;
         position: relative;
     }
@@ -38,11 +38,11 @@
     .hearts span {
         position: absolute;
         display: block;
-        width: 25px;
-        height: 25px;
+        width: 30px;
+        height: 30px;
         background: rgba(255, 0, 80, 0.8);
         animation: floatHearts 10s linear infinite;
-        bottom: -30px;
+        bottom: -40px;
         clip-path: polygon(50% 0%, 61% 19%, 98% 19%, 68% 38%, 
                           79% 75%, 50% 55%, 21% 75%, 32% 38%, 
                           2% 19%, 39% 19%);
@@ -59,44 +59,64 @@
         }
     }
 
-    /* 💎 Game Container */
+    /* 🕹️ Game Container */
     .game-container {
         background: white;
-        border-radius: 10px;
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-        padding: 15px;
-        max-width: 350px;
-        width: 100%;
+        border-radius: 15px;
+        box-shadow: 0 6px 30px rgba(0, 0, 0, 0.25);
+        padding: 20px;
+        width: 90%;
+        max-width: 400px;
         z-index: 10;
         position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        transition: all 0.3s ease;
     }
 
     h1 {
         color: #667eea;
         text-align: center;
-        margin-bottom: 12px;
-        font-size: 1.2em;
+        margin-bottom: 15px;
+        font-size: clamp(1.2rem, 2.5vw, 1.8rem);
     }
 
+    /* Stats Bar */
     .game-info {
         display: flex;
         justify-content: space-between;
-        margin-bottom: 12px;
-        padding: 6px;
-        background: #f8f9fa;
-        border-radius: 6px;
-    }
-
-    .info-item { text-align: center; }
-    .info-label { font-size: 0.7em; color: #666; margin-bottom: 2px; }
-    .info-value { font-size: 0.9em; font-weight: bold; color: #667eea; }
-
-    .puzzle-area {
+        width: 100%;
+        margin-bottom: 15px;
+        padding: 8px;
         background: #f8f9fa;
         border-radius: 8px;
-        padding: 10px;
-        margin-bottom: 12px;
+    }
+
+    .info-item {
         text-align: center;
+        flex: 1;
+    }
+
+    .info-label {
+        font-size: 0.8em;
+        color: #666;
+    }
+
+    .info-value {
+        font-size: 1em;
+        font-weight: bold;
+        color: #667eea;
+    }
+
+    /* Puzzle Area */
+    .puzzle-area {
+        background: #f8f9fa;
+        border-radius: 10px;
+        padding: 12px;
+        margin-bottom: 15px;
+        text-align: center;
+        width: 100%;
     }
 
     #puzzleImage {
@@ -107,26 +127,35 @@
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     }
 
-    .loading { font-size: 0.8em; color: #667eea; padding: 15px; }
+    .loading {
+        font-size: 0.9em;
+        color: #667eea;
+        padding: 20px;
+    }
 
-    .answer-section { margin-bottom: 10px; }
+    /* Answer Buttons */
+    .answer-section {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
     .answer-grid {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 6px;
+        grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+        gap: 8px;
         margin-bottom: 8px;
     }
 
     .answer-btn {
-        padding: 8px;
-        font-size: 0.9em;
+        padding: 10px;
+        font-size: 1em;
         border: 1.5px solid #667eea;
         background: white;
         color: #667eea;
         border-radius: 6px;
         cursor: pointer;
-        transition: all 0.2s ease;
         font-weight: bold;
+        transition: all 0.2s ease;
     }
 
     .answer-btn:hover {
@@ -136,31 +165,32 @@
         box-shadow: 0 2px 4px rgba(102, 126, 234, 0.3);
     }
 
+    /* Input Section */
     .input-section {
         display: flex;
-        gap: 6px;
-        margin-bottom: 10px;
+        gap: 8px;
+        width: 100%;
     }
 
     #answerInput {
         flex: 1;
-        padding: 6px;
-        font-size: 0.9em;
+        padding: 10px;
+        font-size: 1em;
         border: 1.5px solid #667eea;
         border-radius: 6px;
         outline: none;
     }
 
     #submitBtn {
-        padding: 6px 12px;
-        font-size: 0.9em;
+        padding: 10px 15px;
+        font-size: 1em;
         background: #667eea;
         color: white;
         border: none;
         border-radius: 6px;
         cursor: pointer;
-        transition: all 0.2s ease;
         font-weight: bold;
+        transition: all 0.2s ease;
     }
 
     #submitBtn:hover {
@@ -169,14 +199,16 @@
         box-shadow: 0 2px 4px rgba(102, 126, 234, 0.3);
     }
 
+    /* Feedback */
     .feedback {
         padding: 8px;
         border-radius: 6px;
-        margin-bottom: 8px;
+        margin-bottom: 10px;
         text-align: center;
-        font-size: 0.9em;
+        font-size: 0.95em;
         font-weight: bold;
         display: none;
+        width: 100%;
     }
 
     .feedback.correct {
@@ -195,16 +227,16 @@
 
     #nextBtn {
         width: 100%;
-        padding: 8px;
-        font-size: 0.9em;
+        padding: 10px;
+        font-size: 1em;
         background: #28a745;
         color: white;
         border: none;
         border-radius: 6px;
         cursor: pointer;
-        transition: all 0.2s ease;
         font-weight: bold;
         display: none;
+        transition: all 0.2s ease;
     }
 
     #nextBtn:hover {
@@ -213,23 +245,25 @@
         box-shadow: 0 2px 4px rgba(40, 167, 69, 0.3);
     }
 
+    /* Controls */
     .controls {
         display: flex;
-        gap: 6px;
+        gap: 8px;
         margin-top: 10px;
+        width: 100%;
     }
 
     .control-btn {
         flex: 1;
-        padding: 6px;
-        font-size: 0.8em;
+        padding: 8px;
+        font-size: 0.9em;
         border: 1.5px solid #667eea;
         background: white;
         color: #667eea;
         border-radius: 6px;
         cursor: pointer;
-        transition: all 0.2s ease;
         font-weight: bold;
+        transition: all 0.2s ease;
     }
 
     .control-btn:hover {
@@ -237,10 +271,23 @@
         color: white;
     }
 
-    @media (max-width: 600px) {
-        .game-container { padding: 15px; max-width: 300px; }
-        h1 { font-size: 1em; }
-        .answer-grid { grid-template-columns: repeat(2, 1fr); }
+    @media (max-width: 480px) {
+        .game-container {
+            padding: 15px;
+            max-width: 95%;
+        }
+        .answer-btn {
+            font-size: 0.9em;
+            padding: 8px;
+        }
+        #submitBtn, #nextBtn {
+            font-size: 0.9em;
+            padding: 8px;
+        }
+        #answerInput {
+            font-size: 0.9em;
+            padding: 8px;
+        }
     }
 </style>
 </head>
@@ -257,7 +304,7 @@
         <span style="left:80%; animation-delay: 7s;"></span>
     </div>
 
-    <!-- 🎮 Game Container -->
+    <!-- 🧠 Game Box -->
     <div class="game-container">
         <h1>🎮 Heart Math Puzzle</h1>
         
