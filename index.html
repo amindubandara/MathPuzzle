@@ -5,67 +5,56 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Heart Game - Math Puzzle</title>
 <style>
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
+/* === RESET === */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 12px;
+    overflow: hidden;
+    position: relative;
+}
 
-    body {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background: linear-gradient(135deg, #010412 0%, #764ba2 100%);
-        min-height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 12px;
-        overflow: hidden;
-        position: relative;
-    }
+/* ❤️ Floating Hearts Background */
+.hearts {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    overflow: hidden;
+    z-index: 0;
+    pointer-events: none;
+}
+.hearts span {
+    position: absolute;
+    display: block;
+    width: 25px; height: 25px;
+    background: rgba(255, 0, 80, 0.8);
+    animation: floatHearts 10s linear infinite;
+    bottom: -30px;
+    clip-path: polygon(50% 0%, 61% 19%, 98% 19%, 68% 38%, 
+                      79% 75%, 50% 55%, 21% 75%, 32% 38%, 
+                      2% 19%, 39% 19%);
+}
+@keyframes floatHearts {
+    0% {transform: translateY(0) scale(1) rotate(0deg);opacity: 1;}
+    100% {transform: translateY(-800px) scale(1.5) rotate(360deg);opacity: 0;}
+}
 
-    /* ❤️ Floating Hearts Background */
-    .hearts {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-        z-index: 0;
-        pointer-events: none;
-    }
-
-    .hearts span {
-        position: absolute;
-        display: block;
-        width: 25px;
-        height: 25px;
-        background: rgba(255, 0, 80, 0.8);
-        animation: floatHearts 10s linear infinite;
-        bottom: -30px;
-        clip-path: polygon(50% 0%, 61% 19%, 98% 19%, 68% 38%, 
-                          79% 75%, 50% 55%, 21% 75%, 32% 38%, 
-                          2% 19%, 39% 19%);
-    }
-
-    @keyframes floatHearts {
-        0% {
-            transform: translateY(0) scale(1) rotate(0deg);
-            opacity: 1;
-        }
-        100% {
-            transform: translateY(-800px) scale(1.5) rotate(360deg);
-            opacity: 0;
-        }
-    }
-
-  /* 💎 Game Container */
-.game-container {
+/* === Containers === */
+.container {
     background: white;
     border-radius: 10px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
-    padding: 10px;
-    max-width: 380px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+    padding: 20px;
+    max-width: 400px;
     width: 100%;
     z-index: 10;
     position: relative;
@@ -73,329 +62,364 @@
     opacity: 0;
     transform: translateY(15px);
     transition: all 0.4s ease;
-    margin-bottom: 25px;
 }
-
-.game-container.show {
+.container.show {
     display: block;
     opacity: 1;
     transform: translateY(0);
 }
-
-h1 {
+h1, h2 {
     color: #667eea;
     text-align: center;
     margin-bottom: 10px;
-    font-size: 1.3em;
 }
 
-.game-info {
+/* === Login Page === */
+.login-form {
     display: flex;
-    justify-content: space-around;
-    margin-bottom: 12px;
-    margin-top: 18px;
-    padding: 5px;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+}
+
+.google-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 12px 24px;
+    border: 2px solid #4285f4;
+    border-radius: 6px;
+    background: white;
+    color: #4285f4;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+    width: 100%;
+    max-width: 280px;
+}
+
+.google-btn:hover {
+    background: #4285f4;
+    color: white;
+}
+
+.google-btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+.login-info {
+    text-align: center;
+    color: #666;
+    font-size: 0.9em;
+    margin-top: 10px;
+}
+
+input[type="email"], input[type="password"] {
+    padding: 8px;
+    border: 1.3px solid #667eea;
+    border-radius: 6px;
+    font-size: 1em;
+}
+button {
+    padding: 8px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.btn-primary {
+    background: #667eea;
+    color: white;
+}
+.btn-primary:hover {
+    background: #5568d3;
+}
+.btn-danger {
+    background: #dc3545;
+    color: white;
+}
+.btn-success {
+    background: #28a745;
+    color: white;
+}
+
+/* === Dashboard === */
+.dashboard {
+    text-align: center;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin: 15px 0;
+    padding: 15px;
     background: #f8f9fa;
     border-radius: 8px;
 }
 
+.user-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 3px solid #667eea;
+}
+
+.user-info {
+    text-align: left;
+}
+
+.user-name {
+    font-weight: bold;
+    color: #667eea;
+    font-size: 1.1em;
+}
+
+.user-email {
+    color: #666;
+    font-size: 0.9em;
+}
+
+.dashboard p {
+    margin: 10px 0;
+}
+.dashboard button {
+    width: 100%;
+    margin-top: 10px;
+}
+
+/* === Game Container === */
+.game-container {
+    text-align: center;
+}
+.game-info {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 12px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 5px;
+}
 .info-item { text-align: center; }
-.info-label { font-size: 0.7em; color: #666; margin-bottom: 2px; }
+.info-label { font-size: 0.7em; color: #666; }
 .info-value { font-size: 0.9em; font-weight: bold; color: #667eea; }
 
 .puzzle-area {
     background: #f8f9fa;
     border-radius: 8px;
     padding: 6px;
-    margin-bottom: 8px;
+    margin: 10px auto;
     text-align: center;
     max-width: 270px;
-    margin: 0 auto 10px;
 }
+#puzzleImage {width: 260px;border-radius: 6px;margin-bottom: 5px;}
+.loading {color: #667eea;font-size: 0.9em;}
 
-#puzzleImage {
-    width: 260px;
-    height: auto;
-    border-radius: 6px;
-    margin-bottom: 5px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-.loading {
-    font-size: 0.85em;
-    color: #667eea;
-    padding: 10px;
-}
-
-.answer-section { margin-bottom: 8px; }
 .answer-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 4px;
-    margin-bottom: 6px;
+    margin-bottom: 10px;
 }
-
 .answer-btn {
-    padding: 5px;
-    font-size: 0.95em;
     border: 1.3px solid #667eea;
     background: white;
     color: #667eea;
+    padding: 6px;
     border-radius: 6px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    font-weight: 600;
+    font-weight: bold;
 }
-
 .answer-btn:hover {
     background: #667eea;
     color: white;
-    transform: translateY(-1px);
-    box-shadow: 0 3px 5px rgba(102, 126, 234, 0.4);
-}
-
-.input-section {
-    display: flex;
-    gap: 6px;
-    margin-bottom: 10px;
-}
-
-#answerInput {
-    flex: 1;
-    padding: 4px 8px;
-    font-size: 0.95em;
-    border: 1.3px solid #667eea;
-    border-radius: 6px;
-    outline: none;
-}
-
-#submitBtn {
-    padding: 5px 12px;
-    font-size: 0.95em;
-    background: #667eea;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    font-weight: 600;
-}
-
-#submitBtn:hover {
-    background: #5568d3;
-    transform: translateY(-1px);
-    box-shadow: 0 3px 5px rgba(102, 126, 234, 0.4);
 }
 
 .feedback {
-    padding: 8px;
-    border-radius: 6px;
-    margin-bottom: 10px;
-    text-align: center;
-    font-size: 0.95em;
-    font-weight: bold;
-    display: none;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.feedback.correct {
-    background: #d4edda;
-    color: #155724;
-    border: 1.3px solid #c3e6cb;
-    display: block;
-    opacity: 1;
-}
-
-.feedback.incorrect {
-    background: #f8d7da;
-    color: #721c24;
-    border: 1.3px solid #f5c6cb;
-    display: block;
-    opacity: 1;
-}
-
-#nextBtn {
-    width: 100%;
-    padding: 8px;
-    font-size: 0.95em;
-    background: #28a745;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    font-weight: bold;
-    display: none;
-    margin-bottom: 8px;
-}
-
-#nextBtn:hover {
-    background: #218838;
-    transform: translateY(-1px);
-    box-shadow: 0 3px 5px rgba(40, 167, 69, 0.4);
-}
-
-.controls {
-    display: flex;
-    gap: 6px;
-    margin-top: 8px;
-}
-
-.control-btn {
-    flex: 1;
+    margin: 8px 0;
     padding: 6px;
-    font-size: 0.9em;
-    border: 1.3px solid #667eea;
-    background: white;
-    color: #667eea;
     border-radius: 6px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    font-weight: 600;
+    display: none;
 }
+.feedback.correct {background: #d4edda; color: #155724;}
+.feedback.incorrect {background: #f8d7da; color: #721c24;}
 
-.control-btn:hover {
-    background: #667eea;
-    color: white;
-    transform: translateY(-1px);
-}
+#nextBtn, #quitBtn {width: 100%; margin-top: 8px;}
 
-/* 💫 Popup Styles */
-.popup {
+/* === Modal === */
+.modal {
     position: fixed;
     top: 0; left: 0;
     width: 100%; height: 100%;
-    background: rgba(0,0,0,0.8);
-    display: flex;
+    background: rgba(0,0,0,0.6);
+    display: none;
     justify-content: center;
     align-items: center;
-    z-index: 100;
-    animation: fadeIn 0.6s ease forwards;
+    z-index: 50;
 }
-
-.popup-content {
+.modal-content {
     background: white;
-    padding: 25px 30px;
+    padding: 20px;
     border-radius: 10px;
     text-align: center;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    transform: translateY(-20px);
-    animation: slideUp 0.6s ease forwards;
 }
+.modal-content button {margin: 5px;}
 
-.popup-content h2 {
-    color: #667eea;
-    margin-bottom: 8px;
-    font-size: 1.3em;
-}
-
-.popup-content p {
-    color: #333;
-    margin-bottom: 18px;
-    font-size: 0.95em;
-}
-
-.start-btn {
-    background: #667eea;
-    color: white;
-    border: none;
-    padding: 8px 18px;
+/* === Answer Input === */
+#answerInput {
+    width: 79%;
+    padding: 6px 1px;
+    border: 1.5px solid #667eea;
     border-radius: 6px;
-    font-size: 0.95em;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.3s;
+    font-size: 1em;
+    text-align: center;
+    margin: 3px 0;
+    outline: none;
+    transition: all 0.3s ease;
+    color: #333;
 }
-
-.start-btn:hover {
-    background: #5568d3;
-    transform: scale(1.03);
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-@keyframes slideUp {
-    from { transform: translateY(40px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-}
-
-@media (max-width: 600px) {
-    .answer-grid { grid-template-columns: repeat(2, 1fr); }
-    .game-container { max-width: 90%; }
-    #puzzleImage { width: 230px; }
-}
-
 </style>
 </head>
 <body>
-    <!-- ❤️ Floating Hearts -->
-    <div class="hearts">
-        <span style="left:10%; animation-delay: 0s;"></span>
-        <span style="left:20%; animation-delay: 2s;"></span>
-        <span style="left:30%; animation-delay: 4s;"></span>
-        <span style="left:40%; animation-delay: 6s;"></span>
-        <span style="left:50%; animation-delay: 1s;"></span>
-        <span style="left:60%; animation-delay: 3s;"></span>
-        <span style="left:70%; animation-delay: 5s;"></span>
-        <span style="left:80%; animation-delay: 7s;"></span>
+<div class="hearts">
+    <span style="left:10%; animation-delay: 0s;"></span>
+    <span style="left:20%; animation-delay: 2s;"></span>
+    <span style="left:30%; animation-delay: 4s;"></span>
+    <span style="left:40%; animation-delay: 6s;"></span>
+    <span style="left:50%; animation-delay: 1s;"></span>
+    <span style="left:60%; animation-delay: 3s;"></span>
+    <span style="left:70%; animation-delay: 5s;"></span>
+    <span style="left:80%; animation-delay: 7s;"></span>
+</div>
+
+<!-- LOGIN PAGE -->
+<div class="container show" id="loginPage">
+    <h2>❤️ Heart Math Puzzle</h2>
+    <div class="login-form">
+        <button class="google-btn" id="googleLoginBtn">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+                <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+            </svg>
+            Sign in with Google
+        </button>
+        <p class="login-info">Click above to login with your Google account</p>
     </div>
+</div>
 
-    <!-- 💫 Popup Intro -->
-    <div class="popup" id="introPopup">
-        <div class="popup-content">
-            <h2>❤️ Welcome to Heart Math Puzzle!</h2>
-            <p>Test your brain and solve fun visual math puzzles! Ready to start?</p>
-            <button class="start-btn" id="startGameBtn">Start Game</button>
-        </div>
-    </div>
-
-    <!-- 🎮 Game Container -->
-    <div class="game-container" id="gameContainer">
-        <h1>🎮 Heart Math Puzzle</h1>
-        <div class="game-info">
-            <div class="info-item"><div class="info-label">Score</div><div class="info-value" id="score">0</div></div>
-            <div class="info-item"><div class="info-label">Correct</div><div class="info-value" id="correct">0</div></div>
-            <div class="info-item"><div class="info-label">Wrong</div><div class="info-value" id="wrong">0</div></div>
-        </div>
-
-        <div class="puzzle-area">
-            <div id="loadingText" class="loading">Loading puzzle...</div>
-            <img id="puzzleImage" style="display: none;" alt="Math Puzzle">
-        </div>
-
-        <div class="feedback" id="feedback"></div>
-
-        <div class="answer-section">
-            <div class="answer-grid" id="answerGrid"></div>
-            <div class="input-section">
-                <input type="number" id="answerInput" placeholder="Enter your answer">
-                <button id="submitBtn">Submit</button>
+<!-- DASHBOARD -->
+<div class="container" id="dashboardPage">
+    <h2>🏠 Dashboard</h2>
+    <div class="dashboard">
+        <div class="user-profile">
+            <img id="userAvatar" class="user-avatar" src="" alt="User Avatar">
+            <div class="user-info">
+                <div class="user-name" id="userName"></div>
+                <div class="user-email" id="userEmail"></div>
             </div>
         </div>
-
-        <button id="nextBtn">Next Puzzle</button>
-
-        <div class="controls">
-            <button class="control-btn" onclick="location.reload()">New Game</button>
-            <button class="control-btn" id="hintBtn">Hint</button>
-        </div>
+        <p><strong>Total Score:</strong> <span id="userScore">0</span></p>
+        <button class="btn-success" id="playBtn">Start Game</button>
+        <button class="btn-danger" id="logoutBtn">Logout</button>
     </div>
+</div>
+
+<!-- GAME CONTAINER -->
+<div class="container" id="gameContainer">
+    <h1>🎮 Heart Math Puzzle</h1>
+    <div class="game-info">
+        <div class="info-item"><div class="info-label">Score</div><div class="info-value" id="score">0</div></div>
+        <div class="info-item"><div class="info-label">Correct</div><div class="info-value" id="correct">0</div></div>
+        <div class="info-item"><div class="info-label">Wrong</div><div class="info-value" id="wrong">0</div></div>
+    </div>
+    <div class="puzzle-area">
+        <div id="loadingText" class="loading">Loading puzzle...</div>
+        <img id="puzzleImage" style="display:none;" alt="Math Puzzle">
+    </div>
+    <div class="feedback" id="feedback"></div>
+    <div class="answer-grid" id="answerGrid"></div>
+    <input type="number" id="answerInput" placeholder="Enter answer">
+    <button class="btn-primary" id="submitBtn">Submit</button>
+    <button class="btn-success" id="nextBtn">Next Puzzle</button>
+    <button class="btn-danger" id="quitBtn">Quit Game</button>
+</div>
+
+<!-- Quit Modal -->
+<div class="modal" id="quitModal">
+    <div class="modal-content">
+        <h3>Quit Game?</h3>
+        <p>Your progress will be saved.</p>
+        <button class="btn-danger" id="confirmQuit">Yes, Quit</button>
+        <button class="btn-primary" id="cancelQuit">Cancel</button>
+    </div>
+</div>
+
+<!-- Google Sign-In Script -->
+<script src="https://accounts.google.com/gsi/client" async defer></script>
 
 <script>
+// Google Authentication Configuration
+const GOOGLE_CLIENT_ID = '562627682680-rup5paggps0lab8h68hmcjih0gmt5lpo.apps.googleusercontent.com'; // Replace with your actual Client ID
+
+// Initialize Google Sign-In
+function initGoogleAuth() {
+    google.accounts.id.initialize({
+        client_id: GOOGLE_CLIENT_ID,
+        callback: handleGoogleSignIn
+    });
+}
+
+// Handle Google Sign-In Response
+function handleGoogleSignIn(response) {
+    try {
+        // Decode JWT token to get user info
+        const userInfo = parseJwt(response.credential);
+        
+        // Store user data
+        const userData = {
+            email: userInfo.email,
+            name: userInfo.name,
+            picture: userInfo.picture,
+            sub: userInfo.sub // Google User ID
+        };
+        
+        localStorage.setItem('user', JSON.stringify(userData));
+        localStorage.setItem('googleToken', response.credential);
+        
+        showDashboard();
+    } catch (error) {
+        console.error('Google Sign-In Error:', error);
+        alert('Failed to sign in with Google. Please try again.');
+    }
+}
+
+// Parse JWT token
+function parseJwt(token) {
+    const base64Url = token.split('.')[1];
+    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+    return JSON.parse(jsonPayload);
+}
+
 class HeartGame {
     constructor() {
-        this.apiUrl = 'https://marcconrad.com/uob/smile/api.php';
+        this.apiUrl = 'https://marcconrad.com/uob/heart/api.php';
         this.currentSolution = null;
         this.score = 0;
-        this.correctAnswers = 0;
-        this.wrongAnswers = 0;
+        this.correct = 0;
+        this.wrong = 0;
         this.hasAnswered = false;
 
-        this.elements = {
+        this.el = {
             puzzleImage: document.getElementById('puzzleImage'),
             loadingText: document.getElementById('loadingText'),
             answerGrid: document.getElementById('answerGrid'),
@@ -405,127 +429,172 @@ class HeartGame {
             feedback: document.getElementById('feedback'),
             score: document.getElementById('score'),
             correct: document.getElementById('correct'),
-            wrong: document.getElementById('wrong'),
-            hintBtn: document.getElementById('hintBtn')
+            wrong: document.getElementById('wrong')
         };
-
-        this.initEventListeners();
-        this.loadNewPuzzle();
+        this.init();
     }
 
-    initEventListeners() {
-        this.elements.submitBtn.addEventListener('click', () => this.checkAnswer());
-        this.elements.answerInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') this.checkAnswer(); });
-        this.elements.nextBtn.addEventListener('click', () => this.loadNewPuzzle());
-        this.elements.hintBtn.addEventListener('click', () => this.showHint());
+    init() {
+        this.el.submitBtn.onclick = () => this.checkAnswer();
+        this.el.nextBtn.onclick = () => this.loadPuzzle();
+        this.el.answerInput.onkeypress = (e) => { if (e.key === 'Enter') this.checkAnswer(); };
+        this.loadPuzzle();
     }
 
-    async loadNewPuzzle() {
+    async loadPuzzle() {
         this.hasAnswered = false;
-        this.elements.loadingText.style.display = 'block';
-        this.elements.puzzleImage.style.display = 'none';
-        this.elements.feedback.style.display = 'none';
-        this.elements.nextBtn.style.display = 'none';
-        this.elements.answerInput.value = '';
-        this.elements.answerInput.disabled = false;
-        this.elements.submitBtn.disabled = false;
+        this.el.feedback.style.display = 'none';
+        this.el.loadingText.style.display = 'block';
+        this.el.puzzleImage.style.display = 'none';
+        this.el.nextBtn.style.display = 'none';
+        this.el.answerInput.value = '';
 
         try {
-            const response = await fetch(this.apiUrl);
-            const data = await response.json();
+            const res = await fetch(this.apiUrl);
+            const data = await res.json();
             this.currentSolution = data.solution;
-            this.elements.puzzleImage.src = data.question;
-
-            this.elements.puzzleImage.onload = () => {
-                this.elements.loadingText.style.display = 'none';
-                this.elements.puzzleImage.style.display = 'block';
+            this.el.puzzleImage.src = data.question;
+            this.el.puzzleImage.onload = () => {
+                this.el.loadingText.style.display = 'none';
+                this.el.puzzleImage.style.display = 'block';
             };
-
-            this.generateAnswerButtons();
-        } catch (error) {
-            this.elements.loadingText.textContent = 'Error loading puzzle. Please try again.';
+            this.generateAnswers();
+        } catch {
+            this.el.loadingText.textContent = 'Error loading puzzle.';
         }
     }
 
-    generateAnswerButtons() {
-        this.elements.answerGrid.innerHTML = '';
-        const answers = new Set();
-        answers.add(this.currentSolution);
-
-        while (answers.size < 9) {
-            const randomNum = Math.floor(Math.random() * 20);
-            answers.add(randomNum);
-        }
-
-        const answersArray = Array.from(answers).sort(() => Math.random() - 0.5);
-
-        answersArray.forEach(answer => {
+    generateAnswers() {
+        const answers = new Set([this.currentSolution]);
+        while (answers.size < 9) answers.add(Math.floor(Math.random() * 20));
+        this.el.answerGrid.innerHTML = '';
+        Array.from(answers).sort(() => Math.random() - 0.5).forEach(num => {
             const btn = document.createElement('button');
             btn.className = 'answer-btn';
-            btn.textContent = answer;
-            btn.addEventListener('click', () => {
-                this.elements.answerInput.value = answer;
+            btn.textContent = num;
+            btn.onclick = () => {
+                this.el.answerInput.value = num;
                 this.checkAnswer();
-            });
-            this.elements.answerGrid.appendChild(btn);
+            };
+            this.el.answerGrid.appendChild(btn);
         });
     }
 
     checkAnswer() {
         if (this.hasAnswered) return;
-
-        const userAnswer = parseInt(this.elements.answerInput.value);
-        if (isNaN(userAnswer)) {
-            this.showFeedback('Please enter a valid number!', false);
+        const ans = parseInt(this.el.answerInput.value);
+        if (isNaN(ans)) {
+            alert("Enter a valid number");
             return;
         }
-
         this.hasAnswered = true;
-        this.elements.answerInput.disabled = true;
-        this.elements.submitBtn.disabled = true;
-
-        if (userAnswer === this.currentSolution) {
-            this.score += 10;
-            this.correctAnswers++;
-            this.showFeedback('🎉 Correct! Well done!', true);
+        if (ans === this.currentSolution) {
+            this.score += 10; this.correct++;
+            this.showFeedback("✅ Correct!", true);
         } else {
-            this.wrongAnswers++;
-            this.showFeedback(`❌ Wrong! The correct answer was ${this.currentSolution}`, false);
+            this.wrong++;
+            this.showFeedback(`❌ Wrong! Correct: ${this.currentSolution}`, false);
         }
-
-        this.updateStats();
-        this.elements.nextBtn.style.display = 'block';
-    }
-
-    showFeedback(message, isCorrect) {
-        this.elements.feedback.textContent = message;
-        this.elements.feedback.className = 'feedback ' + (isCorrect ? 'correct' : 'incorrect');
-        this.elements.feedback.style.display = 'block';
-    }
-
-    updateStats() {
-        this.elements.score.textContent = this.score;
-        this.elements.correct.textContent = this.correctAnswers;
-        this.elements.wrong.textContent = this.wrongAnswers;
-    }
-
-    showHint() {
-        if (this.hasAnswered) {
-            alert('You have already answered this puzzle!');
-            return;
+        this.updateUI();
+        this.el.nextBtn.style.display = 'block';
+        
+        // Save score for current user
+        const userData = JSON.parse(localStorage.getItem('user'));
+        if (userData) {
+            localStorage.setItem(`score_${userData.sub}`, this.score);
         }
-        const hint = `The answer is between ${Math.max(0, this.currentSolution - 3)} and ${this.currentSolution + 3}`;
-        alert(hint);
+    }
+
+    showFeedback(msg, correct) {
+        this.el.feedback.textContent = msg;
+        this.el.feedback.className = 'feedback ' + (correct ? 'correct' : 'incorrect');
+        this.el.feedback.style.display = 'block';
+    }
+
+    updateUI() {
+        this.el.score.textContent = this.score;
+        this.el.correct.textContent = this.correct;
+        this.el.wrong.textContent = this.wrong;
     }
 }
 
-/* 💫 Handle Popup */
-document.getElementById('startGameBtn').addEventListener('click', () => {
-    document.getElementById('introPopup').style.display = 'none';
-    const gameContainer = document.getElementById('gameContainer');
+/* === Page Handling === */
+const loginPage = document.getElementById('loginPage');
+const dashboardPage = document.getElementById('dashboardPage');
+const gameContainer = document.getElementById('gameContainer');
+const quitModal = document.getElementById('quitModal');
+
+// Google Login Button
+document.getElementById('googleLoginBtn').onclick = () => {
+    google.accounts.id.prompt(); // Display One Tap dialog
+};
+
+document.getElementById('logoutBtn').onclick = () => {
+    // Sign out from Google
+    google.accounts.id.disableAutoSelect();
+    
+    // Clear local storage
+    localStorage.removeItem('user');
+    localStorage.removeItem('googleToken');
+    
+    showLogin();
+};
+
+document.getElementById('playBtn').onclick = () => {
+    dashboardPage.classList.remove('show');
     gameContainer.classList.add('show');
     new HeartGame();
-});
+};
+
+document.getElementById('quitBtn').onclick = () => quitModal.style.display = 'flex';
+document.getElementById('cancelQuit').onclick = () => quitModal.style.display = 'none';
+document.getElementById('confirmQuit').onclick = () => {
+    quitModal.style.display = 'none';
+    gameContainer.classList.remove('show');
+    showDashboard();
+};
+
+function showLogin() {
+    loginPage.classList.add('show');
+    dashboardPage.classList.remove('show');
+    gameContainer.classList.remove('show');
+}
+
+function showDashboard() {
+    const userStr = localStorage.getItem('user');
+    if (userStr) {
+        const user = JSON.parse(userStr);
+        const score = localStorage.getItem(`score_${user.sub}`) || 0;
+        
+        document.getElementById('userName').textContent = user.name;
+        document.getElementById('userEmail').textContent = user.email;
+        document.getElementById('userAvatar').src = user.picture || 'https://via.placeholder.com/60';
+        document.getElementById('userScore').textContent = score;
+        
+        loginPage.classList.remove('show');
+        dashboardPage.classList.add('show');
+    } else {
+        showLogin();
+    }
+}
+
+// Initialize on page load
+window.onload = () => {
+    // Wait for Google API to load
+    const checkGoogleLoaded = setInterval(() => {
+        if (typeof google !== 'undefined' && google.accounts) {
+            clearInterval(checkGoogleLoaded);
+            initGoogleAuth();
+            
+            // Auto-load correct page
+            if (localStorage.getItem('user')) {
+                showDashboard();
+            } else {
+                showLogin();
+            }
+        }
+    }, 100);
+};
 </script>
 </body>
 </html>
